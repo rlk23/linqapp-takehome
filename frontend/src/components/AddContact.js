@@ -27,8 +27,9 @@ const AddContact = () => {
         const numberExists = contacts.some((contact) => contact.number === number);
 
         if (!name || !email || !number) {
-            return toast.warning('Please fill in all fields!');
+            return toast.error('Please fill in all fields!'); // Ensure the method is correct
         }
+        
 
         if (emailExists) {
             return toast.error('Email already exists!');
