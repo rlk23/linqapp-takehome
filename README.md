@@ -24,7 +24,7 @@ This is a simple web application that allows users to manage a list of contacts.
 - React
 - Redux (State Management)
 - React Router
-- Bootstrap (UI Styling)
+- MaterialUI (UI Styling)
 - Toastify (Notifications)
 
 ---
@@ -129,12 +129,4 @@ frontend/
 - Add user authentication and role-based access.
 - Deploy the application to a cloud platform (e.g., AWS, Heroku).
 
----
 
-## **Contributing**
-Feel free to fork the repository and submit pull requests with enhancements or bug fixes.
-
----
-
-## **License**
-This project is open-source and available under the MIT License.
