@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const contactRoutes = require('./src/routes/contactRoutes');
 
 const app = express();
-const PORT = 5001;
+const PORT = 5002;
 
 // Middleware
 app.use(bodyParser.json());

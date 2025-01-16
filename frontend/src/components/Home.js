@@ -1,8 +1,20 @@
-// src/components/Home.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import {
+    Avatar,
+    Button,
+    Checkbox,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography,
+    Paper,
+} from '@mui/material';
 
 const Home = () => {
     const contacts = useSelector((state) => state.contacts);
@@ -14,39 +26,84 @@ const Home = () => {
     };
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12 text-end my-3">
-                    <Link to="/add" className="btn btn-outline-dark">Add Contact</Link>
-                </div>
-                <div className="col-md-8 mx-auto">
-                    <table className="table table-hover">
-                        <thead className="bg-dark text-white text-center">
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {contacts.map((contact, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{contact.name}</td>
-                                    <td>{contact.email}</td>
-                                    <td>{contact.number}</td>
-                                    <td>
-                                        <Link to={`/edit/${contact.id}`} className="btn btn-primary me-2">Edit</Link>
-                                        <button onClick={() => deleteContact(contact.id)} className="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+        <div style={{ padding: '20px' }}>
+            <Typography variant="h4" gutterBottom>
+                Contacts
+            </Typography>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    component={Link}
+                    to="/add"
+                    style={{ textTransform: 'none' }}
+                >
+                    + Add Contact
+                </Button>
             </div>
+            <TableContainer component={Paper}>
+                {contacts.length ? (
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell></TableCell>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Email</TableCell>
+                                <TableCell>Phone</TableCell>
+                                <TableCell align="right">Actions</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {contacts.map((contact) => (
+                                <TableRow key={contact.id}>
+                                    <TableCell>
+                                        <Checkbox />
+                                    </TableCell>
+                                    <TableCell>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <Avatar sx={{ bgcolor: 'primary.main', marginRight: '10px' }}>
+                                                {contact.name.charAt(0).toUpperCase()}
+                                            </Avatar>
+                                            <div>
+                                                <Typography variant="body1">{contact.name}</Typography>
+                                                <Typography variant="caption" color="textSecondary">
+                                                    {contact.email}
+                                                </Typography>
+                                            </div>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell>{contact.email}</TableCell>
+                                    <TableCell>{contact.number}</TableCell>
+                                    <TableCell align="right">
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            size="small"
+                                            style={{ marginRight: '10px' }}
+                                            component={Link}
+                                            to={`/edit/${contact.id}`}
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Button
+                                            variant="outlined"
+                                            color="secondary"
+                                            size="small"
+                                            onClick={() => deleteContact(contact.id)}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                ) : (
+                    <Typography variant="body1" align="center" color="textSecondary" style={{ padding: '20px' }}>
+                        No contacts available. Add some to get started!
+                    </Typography>
+                )}
+            </TableContainer>
         </div>
     );
 };

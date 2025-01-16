@@ -1,8 +1,15 @@
-// src/components/AddContact.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import {
+    Box,
+    Button,
+    Card,
+    TextField,
+    Typography,
+    Stack,
+} from '@mui/material';
 
 const AddContact = () => {
     const [name, setName] = useState('');
@@ -38,43 +45,69 @@ const AddContact = () => {
     };
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 mx-auto">
-                    <form onSubmit={handleSubmit}>
-                        <h2>Add Contact</h2>
-                        <div className="form-group my-2">
-                            <input
-                                type="text"
-                                placeholder="Name"
-                                className="form-control"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group my-2">
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                className="form-control"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group my-2">
-                            <input
-                                type="text"
-                                placeholder="Phone Number"
-                                className="form-control"
-                                value={number}
-                                onChange={(e) => setNumber(e.target.value)}
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-dark">Add Contact</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <Box
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '100vh',
+                backgroundColor: '#f5f5f5',
+                padding: 2,
+            }}
+        >
+            <Card
+                sx={{
+                    width: 400,
+                    padding: 3,
+                    boxShadow: 3,
+                    borderRadius: 2,
+                }}
+            >
+                <Typography variant="h5" component="h3" textAlign="center" gutterBottom>
+                    Add New Contact
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <Stack spacing={3}>
+                        <TextField
+                            id="name"
+                            label="Name"
+                            variant="outlined"
+                            fullWidth
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            id="email"
+                            label="Email"
+                            type="email"
+                            variant="outlined"
+                            fullWidth
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <TextField
+                            id="number"
+                            label="Phone Number"
+                            type="text"
+                            variant="outlined"
+                            fullWidth
+                            value={number}
+                            onChange={(e) => setNumber(e.target.value)}
+                        />
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            fullWidth
+                            sx={{ textTransform: 'none' }}
+                        >
+                            Add Contact
+                        </Button>
+                    </Stack>
+                </form>
+            </Card>
+        </Box>
     );
 };
 
